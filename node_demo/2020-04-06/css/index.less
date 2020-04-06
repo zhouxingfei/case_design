@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+html,body{
+    background-color: gainsboro;
+}
+
+.wrapper{
+    width: 1200px;
+    margin: 0 auto;
+    .navList{
+        background-color: #fff;
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+        li{
+            height: 35px;
+            width: 80px;
+            line-height: 35px;
+            font-size: 18px;
+            cursor: pointer;
+            user-select: none;
+            a{
+                text-decoration: none;
+                color: black;
+            }
+        }
+        >li:nth-child(1){
+            margin-left: 15px;
+            cursor: default;
+        }
+       
+    }
+    .productBox{
+        display: flex;
+        flex-wrap: wrap;
+       
+        >li{
+            background-color: #fff;
+            width: 19.2%;
+            height: 350px;
+            margin: 10px 1% 10px 0px;
+            img{
+                width: 100%;
+            }
+            >h2{
+                font-size: 16px;
+                height: 25px;
+                line-height: 25px;
+                margin-left: 15px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+           
+            >h2:nth-child(4n+3){
+                color: red;
+            }
+        }
+        >li:nth-child(5n){
+            margin-right: 0px;
+        }
+    }
+}

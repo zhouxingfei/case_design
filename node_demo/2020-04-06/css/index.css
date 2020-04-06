@@ -1,0 +1,63 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+html,
+body {
+  background-color: gainsboro;
+}
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+.wrapper .navList {
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.wrapper .navList li {
+  height: 35px;
+  width: 80px;
+  line-height: 35px;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+}
+.wrapper .navList li a {
+  text-decoration: none;
+  color: black;
+}
+.wrapper .navList > li:nth-child(1) {
+  margin-left: 15px;
+  cursor: default;
+}
+.wrapper .productBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper .productBox > li {
+  background-color: #fff;
+  width: 19.2%;
+  height: 350px;
+  margin: 10px 1% 10px 0px;
+}
+.wrapper .productBox > li img {
+  width: 100%;
+}
+.wrapper .productBox > li > h2 {
+  font-size: 16px;
+  height: 25px;
+  line-height: 25px;
+  margin-left: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.wrapper .productBox > li > h2:nth-child(4n+3) {
+  color: red;
+}
+.wrapper .productBox > li:nth-child(5n) {
+  margin-right: 0px;
+}
