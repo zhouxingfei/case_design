@@ -31,7 +31,6 @@ html,body{
             margin-left: 15px;
             cursor: default;
         }
-       
     }
     .productBox{
         display: flex;
@@ -42,6 +41,7 @@ html,body{
             width: 19.2%;
             height: 350px;
             margin: 10px 1% 10px 0px;
+            transition: ease 0.5s;
             img{
                 width: 100%;
             }
@@ -61,6 +61,10 @@ html,body{
         }
         >li:nth-child(5n){
             margin-right: 0px;
+        }
+        >li:hover{
+            box-shadow: 5px 5px 5px gray;
+            transform: translateY(-5px);
         }
     }
 }

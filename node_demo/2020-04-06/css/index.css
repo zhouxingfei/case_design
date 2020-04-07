@@ -42,6 +42,7 @@ body {
   width: 19.2%;
   height: 350px;
   margin: 10px 1% 10px 0px;
+  transition: ease 0.5s;
 }
 .wrapper .productBox > li img {
   width: 100%;
@@ -60,4 +61,8 @@ body {
 }
 .wrapper .productBox > li:nth-child(5n) {
   margin-right: 0px;
+}
+.wrapper .productBox > li:hover {
+  box-shadow: 5px 5px 5px gray;
+  transform: translateY(-5px);
 }
