@@ -52,10 +52,11 @@
     // ‘124252343’  ‘124,252,343’
     let str1 = '12425234333';
     function qianfenfu(target) {
-        let reg1 = /\d{3}/;//定义匹配正则
-        let ary = reg1.execAll(target);
-        let len = target.length - ary.length * 3;
-        let end = len === 0 ? '' : ',' + target.substring(ary.length - len, ary.length);
+        target = Array.from(target).join('');
+        let reg1 = new RegExp(/\d{3}/,'g'),//定义匹配正则
+            ary = target.match(reg1),
+            len = target.length - ary.length * 3,
+            end = len === 0 ? '' : ',' + target.substring(ary.length - len, ary.length);
         return ary.join(',') + end;
     }
     console.log('处理后的千分符' + qianfenfu(str1));

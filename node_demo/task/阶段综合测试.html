@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>综合测试</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let f1 = function f1() {
+        let res = parseFloat('left:200px');
+        if (res === 200) {
+            alert(200);
+        } else if (res === NaN) {
+            alert(NaN);
+        } else if (typeof res === 'number') {
+            alert('number');//==>number
+        } else {
+            alert('Invalid Number');
+        }
+    }
+    //f1();
+    let f2 = function f2() {
+        let result = 10 + false + undefined + [] + '北京珠峰培训' + null + true + {};
+        console.log(result);//=>NaN北京珠峰培训nulltrue[object Object]
+        console.log({}.toString());
+    }
+    //f2();
+    let f3 = function f3() {
+        /* let a = 12;
+        let b = a;
+        b = 13;
+        console.log(a);//=> 12 */
+        /*  let a = { n: 12 };
+         let b = a;
+         b['n'] = 13;
+         console.log(a.n);//=>13 */
+        let a = { n: 12 };
+        let b = a;
+        b = { n: 13 };
+        console.log(a.n);//=>12
+    }
+    // f3();
+    let f4 = function f4() {
+        let a = { n: 1 };
+        let b = a;
+        a.x = a = { n: 2 };
+        console.log(a.x);//=>undefined
+        console.log(b);//=>n: 1  x:n: 2
+    }
+    //f4(); //=======================================
+    let f5 = function f5() {
+        let a = typeof typeof typeof [12, 23];
+        console.log(a);//=>string    因为typeof的返回结果一定是字符串，所以只要有两个连续以上的typeof返回结果都为string
+    }
+    //f5();
+    let f6 = function f6() {
+        debugger
+        var name = 10;
+        var obj = {
+            name: '珠峰培训'
+        };
+        console.log(obj.name);//=>'珠峰培训'
+        console.log(obj['name']);//=>'珠峰培训'
+        console.log(obj['' + name]);//=>'珠峰培训'====================>undefined  
+        var name = 'name';
+        console.log(obj[name]);//=>'珠峰培训'
+    }
+    // f6();
+    let f7 = function f7() {
+        var x = 5,
+            y = 6;
+        function func() {
+            x += y;
+            func = function (y) {
+                console.log(y + (--x));
+            };
+            console.log(x, y);
+        }
+        func(4);//=>11,6
+        func(3);//=>13
+        console.log(x, y);  //=>10,6============================================
+    }
+    // f7();
+    let f8 = function f8() {
+        var x = 4;
+        function func() {
+            return function (y) {
+                console.log(y + (--x));
+            }
+        }
+        var f = func(5);
+        f(6);//=>9
+        func(7)(8);//=>10
+        f(9);//=>10
+        console.log(x);//=>>1
+    }
+    // f8();
+
+    // var x = 3,//=>12  156
+    //     obj = { x: 5 };
+    // obj.fn = (function () {
+    //     this.x *= ++x;//
+    //     return function (y) {
+    //         this.x *= (++x) + y;
+    //         console.log(x);
+    //     }
+    // })();
+    // var fn = obj.fn;
+    // obj.fn(6);//
+    // fn(4);//=>
+    // console.log(obj.x, x);
+
+    let f10 = function f10() {
+        var a = 0;
+        if (true) {
+            a = 1;
+            function a() { };
+            a = 21;
+            console.log(a)//21
+        }
+        console.log(a);//1
+    }
+    // f10();
+
+    let f11 = function f11() {
+        function fun(n, o) {
+            console.log(o);
+            return {
+                fun: function (m) {
+                    return fun(m, n);
+                }
+            };
+        }
+        var c = fun(0).fun(1);//undefined 0
+        c.fun(2); // 1
+        c.fun(3);// 1
+    }
+    // f11();
+
+    let f12 = function f12() {
+        var a = {
+            n: 0,
+            valueOf() {
+                return ++this.n;
+            }
+        };
+        if (a == 1 && a == 2 && a == 3) {
+            console.log(1);
+        }
+    }
+    // f12();
+
+    let f13 = function f13() {
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                console.log(i);
+            }, 1000);
+        }
+    }
+    // f13();
+
+    let f14 = function f14() {
+        debugger
+        var b = 10;
+        (function b() {
+            b = 20;
+            console.log(b);//=>20
+        })();
+        console.log(b)//=>;
+
+        // var b = 10;
+        // if (true) {
+        //     (function b() {
+        //     })();
+        //     b = 20;
+        //     console.log(b);//=>20
+        // }
+        // console.log(b)//=>;
+    }
+
+    // f14();
+
+    let f15 = function f15() {
+        let obj = {
+            0: 3,
+            1: 4,
+            length: 0,
+            push: Array.prototype.push
+        }
+        obj.push(10);
+        obj.push(20);
+        console.log(obj);//=>{0: 10, 1: 20, length: 2, push: ƒ}
+        // console.dir(Array);=========================
+    }
+    // f15();
+
+    let f16 = function f16() {
+        /* let a = {}, b = '0', c = 0;
+        a[b] = '珠峰';
+        a[c] = '培训';
+        console.log(a[b]);//=>培训 
+ */
+        // ---------------------
+        //example 2
+        /*  let a = {}, b = Symbol('1'), c = Symbol('1');
+         a[b] = '珠峰';
+         a[c] = '培训';
+         console.log(a[b]);//=>珠峰 */
+
+        // ---------------------
+        //example 3
+        let a = {}, b = { n: '1' }, c = { m: '2' };
+        a[b] = '珠峰';
+        console.log(a);
+        a[c] = '培训';
+        console.log(a);
+        console.log(a[b]);//=>培训
+        //=========对象的属性为字符串，对选哪个转化为[object Object]
+    }
+    // f16();
+
+    let f17 = function f17() {
+        //函数本书
+        function Foo() {
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        }
+        //将函数作为对象添加属性
+        Foo.getName = function () {
+            console.log(2);
+        };
+        //在函数的原型上添加方法
+        Foo.prototype.getName = function () {
+            console.log(3);
+        };
+        //创建一个名为getName的变量，赋值为为一个函数
+        var getName = function () {
+            console.log(4);
+        };
+        //创建一个函数getName
+        function getName() {
+            console.log(5);
+        }
+        //将函数作为对象调用属性
+        Foo.getName();//=>2
+        //执行getName方法
+        getName();//=>5
+        //执行Foo函数，对getName方法重新赋值1，函数返回的this属于属于函数本书，调用本身方法
+        //Foo().getName();//==========>报错Foo(...).getName is not a function
+        //调用在foo中重新赋值的getName方法
+        getName();//=>1
+        //陷阱性承欢访问，然后在new
+        new Foo.getName();//=>2
+        new Foo().getName();//=>3
+        new new Foo().getName();//3
+    }
+    // f17();//============
+
+    let f18 = function f18() {
+        var test = (function (i) {
+            return function () {
+                alert(i *= 2);
+            }
+        })(2);
+        test(5);//=>"4"
+    }
+    // f18();
+
+    let f19 = function f19() {
+        function fn(n, m) {
+            return function (i) {
+                return n + m + i;
+            }
+        }
+        let res = fn(1, 2)(3);
+        console.log(res); //=>6  1+2+3
+    }
+    // f19();
+
+    let f20 = function () {
+        function C1(name) {
+            if (name) {
+                this.name = name;
+            }
+        }
+        function C2(name) {
+            this.name = name;
+        }
+        function C3(name) {
+            this.name = name || 'join';
+        }
+        C1.prototype.name = 'Tom';
+        C2.prototype.name = 'Tom';
+        C3.prototype.name = 'Tom';
+        alert((new C1().name) + (new C2().name) + (new C3().name));//=>'Tomundefinedjoin'
+    }
+    // f20();
+
+    let f21 = function f21() {
+        function Fn() {
+            let a = 1;
+            this.a = a;
+        }
+        Fn.prototype.say = function () {
+            this.a = 2;
+        }
+        Fn.prototype = new Fn;
+        let f1 = new Fn;
+
+        Fn.prototype.b = function () {
+            this.a = 3;
+        };
+        console.log(f1.a);//=>1
+        console.log(f1.prototype);//============>undefined
+        console.log(f1.b);//b()
+        console.log(f1.hasOwnProperty('b'));//=>false
+        console.log('b' in f1);//=>true
+        console.log(f1.constructor == Fn);//=>true
+    }
+    // f21();
+
+    let f22 = function f22() {
+        function Dog(name) {
+            this.name = name;
+        }
+        Dog.prototype.bark = function () {
+            console.log('wangwang');
+        }
+        Dog.prototype.sayName = function () {
+            console.log('my name is ' + this.name);
+        }
+        function _new(fName, rName) {
+            //=>完成你的代码
+            return new fName(rName);
+        }
+        let sanmao = _new(Dog, '三毛');
+        sanmao.bark(); //=>"wangwang"
+        sanmao.sayName(); //=>"my name is 三毛"
+        console.log(sanmao instanceof Dog); //=>true
+    }
+    // f22();
+
+    let f23 = function f23() {
+        let n = 10;
+        function plus(tar) {
+            return this + tar;
+        }
+        function minus(tar) {
+            return this - tar;
+        }
+        Number.prototype.plus = plus;
+        Number.prototype.minus = minus;
+        let m = n.plus(10).minus(5);
+        console.log(m);//=>15（10+10-5）
+    }
+    // f23();
+
+    let f24 = function f24() {
+        /*
+        * 编写queryURLParams方法实现如下的效果（至少两种方案）
+        */
+        let url = "http://www.zhufengpeixun.cn/?lx=1&from=wx#video";
+        function queryURLParams(tar){
+            let reg = new RegExp(tar+"=");
+        }
+        console.log(url.queryURLParams("from")); //=>"wx"
+        console.log(url.queryURLParams("_HASH")); //=>"video"
+
+    }
+</script>
