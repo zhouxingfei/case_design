@@ -13,6 +13,7 @@
 
 </html>
 <script>
+
     let f1 = function f1() {
         let res = parseFloat('left:200px');
         if (res === 200) {
@@ -25,7 +26,10 @@
             alert('Invalid Number');
         }
     }
-    //f1();
+        //f1();
+
+       /*  + 的一边出现 字符串（或者出现对象【先转换为字符串 valueOf/toString】）都是字符串拼接
+    Object.prototype.toString 检测数据类型的 */
     let f2 = function f2() {
         let result = 10 + false + undefined + [] + '北京珠峰培训' + null + true + {};
         console.log(result);//=>NaN北京珠峰培训nulltrue[object Object]
@@ -107,6 +111,8 @@
     //     obj = { x: 5 };
     // obj.fn = (function () {
     //     this.x *= ++x;//
+    //     console.log('我是自执行函数中的this' + x);
+    //     console.log('我是自执行函数中的this' + this.x);
     //     return function (y) {
     //         this.x *= (++x) + y;
     //         console.log(x);
@@ -258,7 +264,7 @@
         //Foo().getName();//==========>报错Foo(...).getName is not a function
         //调用在foo中重新赋值的getName方法
         getName();//=>1
-        //陷阱性承欢访问，然后在new
+        //先进行成员访问，然后在new
         new Foo.getName();//=>2
         new Foo().getName();//=>3
         new new Foo().getName();//3
@@ -277,6 +283,7 @@
 
     let f19 = function f19() {
         function fn(n, m) {
+            
             return function (i) {
                 return n + m + i;
             }
@@ -369,11 +376,124 @@
         * 编写queryURLParams方法实现如下的效果（至少两种方案）
         */
         let url = "http://www.zhufengpeixun.cn/?lx=1&from=wx#video";
-        function queryURLParams(tar){
-            let reg = new RegExp(tar+"=");
+        function queryURLParams(tar) {
+            let obj = {};
+            //第一种方案：用replace把捕获到的信息存储到对象中
+            // this.replace(/([^?#=&]+)=([^?#=&]+)/g, (...[, $1, $2]) => obj[$1] = $2);
+            // this.replace(/#([^#$=&]+)/g, (...[, $1]) => obj['_HASH'] = $1);
+
+            //第二种方案：用字符串的原始方法去截取
+            // let arr = this.split('?')[1].split('&').map(item=>item.split('='));
+            // let end = arr[arr.length - 1][1].split('#');
+            // arr[arr.length - 1][1]= end[0];
+            // obj['_HASH'] = end[1];
+            // for (let i = 0; i < arr.length; i ++) {
+            //     obj[arr[i][0]] = arr[i][1];
+            // }
+
+            //第三种方案：
+
+
+            return obj[tar];
         }
+        String.prototype.queryURLParams = queryURLParams;
         console.log(url.queryURLParams("from")); //=>"wx"
         console.log(url.queryURLParams("_HASH")); //=>"video"
 
     }
+    // f24();
+
+    let f25 = function f25() {
+        // function Modal(x, y) {
+        //     this.x = x;
+        //     this.y = y;
+        // }
+        // Modal.prototype.z = 10;
+        // Modal.prototype.getX = function () {
+        //     console.log(this.x);
+        // }
+        // Modal.prototype.getY = function () {
+        //     console.log(this.y);
+        // }
+        // Modal.n = 200;
+        // Modal.setNumber = function (n) {
+        //     this.n = n;
+        // };
+        // let m = new Modal(10, 20);
+        // console.log(m);
+
+        // let j = Modal.setNumber(10);
+        // let h = Modal.n;
+        // console.log(h);
+
+        //基于es6中的class重构上面的代码
+        class Modal {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            static n = 100;
+            static setNumber(n) {
+                this.n = n;
+            }
+            getX() {
+                console.log(this.x);
+            }
+            getY() {
+                console.log(this.y);
+            }
+            //?怎样在类的原型上添加一个公有属性值=======================
+        }
+        let m = new Modal(10, 20);
+        console.log(m);
+    }
+    // f25();
+
+    /*  介绍下 var、let、const 的区别？
+    * var存在变量提升，let/const不存在变量提升
+    * var能够重复声明，let/const不能够重复声明
+    * 在全局上下文中，用VAR声明的变量即是全局变量，也相当于给GO(window)设置了一个属性，而且两者建立映射机制；但是用LET声明的变量仅仅是全局变量，和GO没啥关系，const创建的变量不能够改变*/
+</script>
+<script>
+    // parseInt函数存在两个函数，parseInt[string][radix]
+    let ff1 = function ff1() {
+        let arr = [1, 2, 3, 4];
+        arr = arr.map(parseInt);
+        console.log(arr);
+    }
+    ff1();
+
+    let myArr = [1, 2, 3, 4, 5, 6];
+    let checkSum = function checkSum(arr, sum) {
+        let obj = {};
+        for (let i = 0; i < arr.length; i++) {
+            //减去数组中的每一项，得到一个值
+            let val = sum - arr[i];
+            //去判断对象中是否包含我们循环的此项如果包含，返回结果
+            if (obj[arr[i]] !== undefined) {
+                return `${arr[i]} ${val}`;
+            }
+            //如果不包含，将我们得到的差值保存到对象中
+            obj[val] = val;
+        }
+        return 'notfound';
+    }
+    // console.log(checkSum(myArr, 9));
+
+    let ff2 = function f22() {
+        var name = '珠峰培训';
+        function A(x, y) {
+            var res = x + y;
+            console.log(res, this.name);
+        }
+        function B(x, y) {
+            var res = x - y;
+            console.log(res, this.name);
+        }
+        B.call(A, 40, 30);//=>10 'A'
+        B.call.call.call(A, 20, 10);//30 B
+        Function.prototype.call(A, 60, 50);
+        Function.prototype.call.call.call(A, 80, 70);
+    }
+    // ff2();
 </script>
