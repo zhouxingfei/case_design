@@ -25,7 +25,7 @@ let shopSerch = (function () {
         name: '网络',
         content: ["联通3G", "双卡单4G", "双卡双4G", "联通4G", "电信4G", "移动4G"]
     }];
-
+    //渲染页面
     let bindHTML = function bindHTML() {
         $(`<span>你的选择:</span>
         <mark data-id="${chooseData[0].id}">
@@ -78,9 +78,7 @@ let shopSerch = (function () {
         $('#choose a').on('click', function () {
             let id = $(this).parent().attr('data-id'),
                 $makes = $('#choose mark');
-            $makes.filter((index,item)=>{
-                return $(item).attr('data-id') == id;
-            }).remove();
+            $makes.filter((index,item)=>$(item).attr('data-id') == id).remove();
             // console.log($makes);
             // $makes.appendTo($choose);
         });

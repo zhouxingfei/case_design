@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js实现jq的fadeIn函数效果</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: salmon;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+</body>
+
+</html>
+<script>
+    /*params:ele淡入的元素
+    *       ：speed淡入的速度
+            ：淡入的透明度确切值
+    */
+    let fadeIn = function fadeIn(ele, speed, opacity) {
+        //设置默认透明度参数
+        opacity = opacity || 1;
+        //设置渐变速度
+        speed = speed || 20;
+        //设置元素现实
+        ele.style.display = 'block';
+        ele.style.opacity = 0;
+        let val = 0;
+        let f = function f() {
+            // debugger
+            val += 1 / speed;
+            if (val > opacity) {
+                val = opacity;
+            }
+            ele.style.opacity = val;
+            requestAnimationFrame(function () {
+                val === 1 ? null : f();
+            });
+        }
+        f();
+
+    }
+    let tar = document.getElementsByClassName('box')[0];
+    fadeIn(tar,200,0.1);
+</script>

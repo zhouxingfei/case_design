@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回到顶部</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            height: 1000%;
+            background: -webkit-linear-gradient(top left, red, green, blue, orange, pink);
+        }
+    
+        #GOTO {
+            position: fixed;
+            right: 0;
+            bottom: 100px;
+            width: 80px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="GOTO">回到顶部</button>
+    <script>
+        window.onscroll = function(){
+            let sT = document.documentElement.scrollTop,
+                cH = document.documentElement.clientHeight;
+                GOTO.style.display = sT > cH?'block':'none';
+        };
+        //固定时间缓动版回到顶部
+        GOTO.onclick = function(){
+            let val = document.documentElement.scrollTop,
+                step = val/(1000/20);//步长
+            let timer = setInterval(() => {
+                document.documentElement.scrollTop -= step;
+                if(document.documentElement.scrollTop <= 0){
+                    document.documentElement.scrollTop = 0;
+                    clearInterval(timer);
+                }
+            }, 20);
+        };
+    </script>
+</body>
+</html>
