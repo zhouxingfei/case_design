@@ -23,6 +23,7 @@
 
 </html>
 <script>
+    let tar = document.getElementsByClassName('box')[0];
     /*params:ele淡入的元素
     *       ：speed淡入的速度
             ：淡入的透明度确切值
@@ -43,13 +44,14 @@
                 val = opacity;
             }
             ele.style.opacity = val;
-            requestAnimationFrame(function () {
-                val === 1 ? null : f();
-            });
+            requestAnimationFrame(()=> val === 1 ? null : f());
         }
         f();
 
     }
-    let tar = document.getElementsByClassName('box')[0];
-    fadeIn(tar,200,0.1);
+    // fadeIn(tar,200,0.1);
+
+    function move(ele,attr,duration,target){
+        
+    }
 </script>

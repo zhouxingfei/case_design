@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <link rel="stylesheet" href="./less/index.css">
+</head>
+
+<body>
+    <div class="box">
+        <ul class='list'>
+            <!-- ul 是一个长条 -->
+            <li>
+                <img src="https://cms-bucket.ws.126.net/2020/0227/f8e3f9e3j00q6cu9c0062c000go006yc.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://cms-bucket.ws.126.net/2020/0306/9084f041j00q6rqcl00l2c000go006yc.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://cms-bucket.ws.126.net/2020/0227/e986cfd0j00q6cu4v001hc000go006yc.jpg" alt="">
+            </li>
+            <li>
+                <img src="https://cms-bucket.ws.126.net/2020/0218/2f1f019fj00q5w7pw008sc000go006yc.jpg" alt="">
+            </li>
+            <li>
+                <img src="http://cms-bucket.ws.126.net/2020/0421/e93e2200p00q94okl00mpc000s600e3c.png" alt="">
+            </li>
+            <li>
+                <img src="https://cms-bucket.ws.126.net/2020/0227/f8e3f9e3j00q6cu9c0062c000go006yc.jpg" alt="">
+            </li>
+        </ul>
+        <div class="btn">
+            <div class="left_btn">&lt;</div>
+            <div class="right_btn"> > </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let box = document.querySelector('.box'),
+        ul = document.querySelector('ul'),
+        btn = document.querySelectorAll('.btn div'),
+        timer = null,
+        start = 0;
+    function move() {
+        timer = setInterval(() => {
+            start -= 600;
+            if (start < -3000) {
+                //如果轮播到最后一张时
+                start = 0
+                ul.style.transition = 'none';
+                ul.style.transform = `translateX(${start}px)`;
+                //读写分离，让浏览器立即渲染
+                let val = ul.offsetHeight;
+                start = -600;
+                ul.style.transition = 'all 0.3s'
+            } else {
+                ul.style.transition = 'all 0.3s'
+            }
+            ul.style.transform = `translateX(${start}px)`;
+
+        }, 1500);
+    }
+    move();
+    box.onmouseenter = function () {
+        clearInterval(timer);
+    }
+    box.onmouseleave = function () {
+        move();
+    }
+    console.log(btn);
+    btn[0].onclick = ck;
+    btn[1].onclick = ck;
+    function ck() {
+        // console.log(this.className);
+        if (start === 0 || start === -3000) {
+            this.className == 'left_btn' ? start = -3000 : start = 0;
+            ul.style.transition = 'none';
+            ul.style.transform = `translateX(${start}px)`;
+            let val = ul.offsetHeight;
+        }
+        this.className == 'left_btn' ? start += 600 : start -= 600;
+        ul.style.transition = 'all 0.3s';
+        ul.style.transform = `translateX(${start}px)`;
+    }
+
+
+</script>
